@@ -14,7 +14,7 @@ document.getElementById('ollama-form').addEventListener('submit', async function
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: '', // Change to your model name if needed
+        model: 'deepseek-r1:1.5b',
         prompt: prompt
       })
     });

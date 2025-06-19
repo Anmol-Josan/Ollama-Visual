@@ -11,10 +11,10 @@
         html,
         body {
             height: 100%;
-            /* Add animated gradient background */
-            background: linear-gradient(120deg, #e0e7ff 0%, #f5f6fa 50%, #c7d2fe 100%);
+            /* Calming blue/green animated gradient background */
+            background: linear-gradient(120deg, #c7eaff 0%, #e0f7fa 50%, #b2f7ef 100%);
             background-size: 200% 200%;
-            animation: gradientMove 8s ease-in-out infinite;
+            animation: gradientMove 12s ease-in-out infinite;
         }
 
         @keyframes gradientMove {
@@ -48,9 +48,9 @@
         .ollama-card {
             width: 100%;
             max-width: 600px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
             border-radius: 18px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.92);
             padding: 2.5rem 2rem 2rem 2rem;
         }
 
@@ -60,20 +60,20 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: #485fc7;
+            background: #5ec6e7;
             color: #fff;
             font-size: 2.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(72, 95, 199, 0.15);
+            box-shadow: 0 2px 8px rgba(72, 95, 199, 0.10);
         }
 
         #response {
             min-height: 100px;
             font-size: 1.1rem;
-            background: #f0f4ff;
-            border: 1px solid #dbeafe;
+            background: #e3f6fc;
+            border: 1px solid #b2e4f7;
             border-radius: 10px;
             margin-top: 1.5rem;
             padding: 1.2rem;
@@ -85,8 +85,11 @@
         .footer {
             text-align: center;
             padding: 1.5rem 0 0.5rem 0;
-            color: #888;
+            color: #7bb7b7;
             font-size: 1rem;
+            position: relative;
+            z-index: 2;
+            background: transparent;
         }
 
         .is-loading {
@@ -94,11 +97,26 @@
             pointer-events: none;
         }
 
-        /* Add floating shapes for extra style */
+        /* Calming animated cursor */
+        body,
+        textarea,
+        button,
+        input {
+            cursor: url('data:image/svg+xml;utf8,<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="8" fill="%235ec6e7" opacity="0.5"/></svg>') 16 16, auto;
+            transition: box-shadow 0.3s;
+        }
+
+        textarea:focus,
+        input:focus {
+            box-shadow: 0 0 0 3px #b2f7ef55;
+            outline: none;
+        }
+
+        /* Bubbles behind footer */
         .background-shape {
             position: fixed;
             z-index: 0;
-            opacity: 0.18;
+            opacity: 0.14;
             border-radius: 50%;
             filter: blur(2px);
             pointer-events: none;
@@ -107,25 +125,139 @@
         .shape1 {
             width: 320px;
             height: 320px;
-            background: #818cf8;
-            top: -80px;
+            background: #5ec6e7;
             left: -80px;
+            animation: float1 14s ease-in-out infinite;
         }
 
         .shape2 {
             width: 180px;
             height: 180px;
-            background: #f472b6;
-            bottom: 40px;
+            background: #b2f7ef;
             right: 60px;
+            animation: float2 11s ease-in-out infinite;
         }
 
         .shape3 {
             width: 120px;
             height: 120px;
-            background: #38bdf8;
-            top: 60px;
+            background: #7bb7b7;
             right: 120px;
+            animation: float3 16s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0% {
+                top: -80px;
+                transform: translateY(0);
+                opacity: 0.14;
+            }
+
+            25% {
+                top: 60px;
+                transform: translateY(40px);
+                opacity: 0.18;
+            }
+
+            50% {
+                top: 200px;
+                transform: translateY(120px);
+                opacity: 0.10;
+            }
+
+            75% {
+                top: 60px;
+                transform: translateY(40px);
+                opacity: 0.16;
+            }
+
+            100% {
+                top: -80px;
+                transform: translateY(0);
+                opacity: 0.14;
+            }
+        }
+
+        @keyframes float2 {
+            0% {
+                bottom: 40px;
+                transform: translateY(0);
+                opacity: 0.14;
+            }
+
+            20% {
+                bottom: 120px;
+                transform: translateY(-40px);
+                opacity: 0.18;
+            }
+
+            50% {
+                bottom: 200px;
+                transform: translateY(-120px);
+                opacity: 0.09;
+            }
+
+            80% {
+                bottom: 120px;
+                transform: translateY(-40px);
+                opacity: 0.16;
+            }
+
+            100% {
+                bottom: 40px;
+                transform: translateY(0);
+                opacity: 0.14;
+            }
+        }
+
+        @keyframes float3 {
+            0% {
+                top: 60px;
+                transform: translateY(0);
+                opacity: 0.14;
+            }
+
+            30% {
+                top: 180px;
+                transform: translateY(60px);
+                opacity: 0.18;
+            }
+
+            60% {
+                top: 320px;
+                transform: translateY(120px);
+                opacity: 0.09;
+            }
+
+            85% {
+                top: 180px;
+                transform: translateY(60px);
+                opacity: 0.16;
+            }
+
+            100% {
+                top: 60px;
+                transform: translateY(0);
+                opacity: 0.14;
+            }
+        }
+
+        /* Calming cursor trail dots */
+        .cursor-dot {
+            position: fixed;
+            pointer-events: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #5ec6e7 60%, #b2f7ef 100%);
+            opacity: 0.22;
+            filter: blur(1.5px);
+            z-index: 9999;
+            transition: opacity 0.3s;
+        }
+
+        .cursor-dot.faded {
+            opacity: 0.10;
         }
     </style>
 </head>
@@ -134,6 +266,28 @@
     <div class="background-shape shape1"></div>
     <div class="background-shape shape2"></div>
     <div class="background-shape shape3"></div>
+    <script>
+        // Gently animate bubbles up and down with JS for a more organic effect
+        function animateBubble(el, base, range, speed, phase) {
+            let t = 0;
+            function step() {
+                t += 0.016 * speed;
+                const offset = Math.sin(t + phase) * range;
+                el.style.transform = `translateY(${offset}px)`;
+                requestAnimationFrame(step);
+            }
+            step();
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            const s1 = document.querySelector('.shape1');
+            const s2 = document.querySelector('.shape2');
+            const s3 = document.querySelector('.shape3');
+            if (s1) animateBubble(s1, 0, 40, 0.7, 0);
+            if (s2) animateBubble(s2, 0, 30, 0.5, 1);
+            if (s3) animateBubble(s3, 0, 25, 0.9, 2);
+        });
+    </script>
+
     <div class="main-container">
         <div class="ollama-card">
             <div class="ollama-logo">
@@ -167,8 +321,38 @@
     <footer class="footer">
         <span>Made with <span style="color:#e25555;">&#10084;</span> using Bulma & Ollama</span>
     </footer>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="main.js"></script>
+    <script>
+        // Calming, simple cursor trail with softly fading dots
+        const TRAIL_SIZE = 8;
+        const dots = [];
+        for (let i = 0; i < TRAIL_SIZE; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'cursor-dot';
+            if (i > 0) dot.classList.add('faded');
+            document.body.appendChild(dot);
+            dots.push({el: dot, x: 0, y: 0});
+        }
+        let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        function animateTrail() {
+            let x = mouseX, y = mouseY;
+            for (let i = 0; i < dots.length; i++) {
+                const dot = dots[i];
+                dot.x += (x - dot.x) * 0.22;
+                dot.y += (y - dot.y) * 0.22;
+                dot.el.style.left = (dot.x - 9) + 'px';
+                dot.el.style.top = (dot.y - 9) + 'px';
+                x = dot.x;
+                y = dot.y;
+            }
+            requestAnimationFrame(animateTrail);
+        }
+        animateTrail();
+    </script>
 </body>
 
 </html>
