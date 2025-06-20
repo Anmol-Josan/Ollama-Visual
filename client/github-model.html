@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Model API</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            background: linear-gradient(120deg, #c7eaff 0%, #e0f7fa 50%, #b2f7ef 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 12s ease-in-out infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+        }
+
+        .github-card {
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 2.5rem 2rem 2rem 2rem;
+        }
+
+        .github-logo {
+            display: block;
+            margin: 0 auto 1.5rem auto;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #333;
+            color: #fff;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(72, 95, 199, 0.10);
+        }
+
+        #rate-limit {
+            margin-top: 1.5rem;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        #response {
+            display: none;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            background: #f3f3f3;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 1.2rem;
+            color: #222;
+            word-break: break-word;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem 0 0.5rem 0;
+            color: #7bb7b7;
+            font-size: 1rem;
+            position: relative;
+            z-index: 2;
+            background: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="github-card">
+            <div class="github-logo">
+                <span>🐙</span>
+            </div>
+            <h1 class="title has-text-centered mb-4">GitHub Model API</h1>
+            <form id="github-form">
+                <div class="field">
+                    <label class="label">Model</label>
+                    <div class="control">
+                        <div class="select is-medium">
+                            <select id="model">
+                                <option value="model1">Model 1</option>
+                                <option value="model2">Model 2</option>
+                                <option value="model3">Model 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Prompt</label>
+                    <div class="control">
+                        <textarea class="textarea is-medium" id="prompt" placeholder="Enter your prompt..."
+                            rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="field is-grouped is-grouped-centered mt-4">
+                    <div class="control">
+                        <button class="button is-info is-medium" type="button" id="clear-btn">Clear</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary is-medium" type="button" id="send-btn">Send</button>
+                    </div>
+                </div>
+            </form>
+            <div id="rate-limit"></div>
+            <div id="response"></div>
+        </div>
+    </div>
+    <footer class="footer">
+        <span>Made with <span style="color:#e25555;">&#10084;</span> using Bulma & GitHub API</span>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
