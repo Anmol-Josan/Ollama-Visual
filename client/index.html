@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            background: linear-gradient(120deg, #c7eaff 0%, #e0f7fa 50%, #b2f7ef 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 12s ease-in-out infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+        }
+
+        .index-card {
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 2.5rem 2rem 2rem 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="index-card">
+            <h1>Welcome to the Index Page</h1>
+            <p>This page is styled similarly to the Ollama Visual UI.</p>
+        </div>
+    </div>
+</body>
+
+</html>

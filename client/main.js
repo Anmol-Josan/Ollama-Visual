@@ -1,9 +1,15 @@
 document.getElementById('ollama-form').addEventListener('submit', async function(e) {
   e.preventDefault();
   const prompt = document.getElementById('prompt').value;
+  const model = document.getElementById('model').value;
   const responseBox = document.getElementById('response');
+  const thinkingBox = document.getElementById('thinking');
   responseBox.style.display = 'block';
   responseBox.textContent = '';
+  if (thinkingBox) {
+    thinkingBox.style.display = 'none';
+    thinkingBox.textContent = '';
+  }
   const sendBtn = document.getElementById('send-btn');
   if (sendBtn) sendBtn.classList.add('is-loading');
 
@@ -14,7 +20,7 @@ document.getElementById('ollama-form').addEventListener('submit', async function
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'deepseek-r1:1.5b',
+        model: model,
         prompt: prompt
       })
     });
@@ -35,7 +41,14 @@ document.getElementById('ollama-form').addEventListener('submit', async function
           const data = JSON.parse(line);
           if (data.response) {
             result += data.response;
-            responseBox.textContent = result;
+            // Parse <think>...</think> if present
+            let thinkMatch = result.match(/<think>([\s\S]*?)<\/think>/i);
+            let mainText = result.replace(/<think>[\s\S]*?<\/think>/i, '').trim();
+            if (thinkMatch && thinkingBox) {
+              thinkingBox.textContent = thinkMatch[1].trim();
+              thinkingBox.style.display = 'block';
+            }
+            responseBox.textContent = mainText;
           }
         } catch (e) {
           // ignore malformed lines

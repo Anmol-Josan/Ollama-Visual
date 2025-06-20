@@ -287,7 +287,6 @@
             if (s3) animateBubble(s3, 0, 25, 0.9, 2);
         });
     </script>
-
     <div class="main-container">
         <div class="ollama-card">
             <div class="ollama-logo">
@@ -295,6 +294,24 @@
             </div>
             <h1 class="title has-text-centered mb-4">Ollama Visual UI</h1>
             <form id="ollama-form">
+                <div class="field">
+                    <label class="label">Model</label>
+                    <div class="control">
+                        <div class="select is-medium" style="width:100%">
+                            <select id="model" style="width:100%">
+                                <option value="phi4-mini-reasoning:latest">phi4-mini-reasoning:latest (3.2 GB)</option>
+                                <option value="gemma3:4b-it-qat">gemma3:4b-it-qat (4.0 GB)</option>
+                                <option value="deepseek-r1:7b">deepseek-r1:7b (4.7 GB)</option>
+                                <option value="tripplyons/r1-distill-qwen-7b:latest">tripplyons/r1-distill-qwen-7b:latest (5.4 GB)
+                                </option>
+                                <option value="deepseek-coder:6.7b">deepseek-coder:6.7b (3.8 GB)</option>
+                                <option value="deepseek-r1:14b">deepseek-r1:14b (9.0 GB)</option>
+                                <option value="deepseek-r1:1.5b" selected>deepseek-r1:1.5b (1.1 GB)</option>
+                                <option value="deepseek-coder:1.3b">deepseek-coder:1.3b (776 MB)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <div class="field">
                     <label class="label">Prompt</label>
                     <div class="control">
@@ -315,15 +332,18 @@
                     </div>
                 </div>
             </form>
+            <div id="thinking" style="display:none; margin-bottom:1rem; color:#5ec6e7; font-style:italic; font-size:1.05rem;"></div>
             <div id="response" style="display:none;"></div>
         </div>
     </div>
     <footer class="footer">
         <span>Made with <span style="color:#e25555;">&#10084;</span> using Bulma & Ollama</span>
     </footer>
+
     <script src="main.js"></script>
+
     <script>
-        // Calming, simple cursor trail with softly fading dots
+        // Calming, simple cursor trail with fading dots
         const TRAIL_SIZE = 8;
         const dots = [];
         for (let i = 0; i < TRAIL_SIZE; i++) {
