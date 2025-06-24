@@ -142,7 +142,85 @@
         <span>Made with <span style="color:#e25555;">&#10084;</span> using Bulma & GitHub API</span>
     </footer>
 
-    <script src="main.js"></script>
+    <script>
+        document.getElementById('send-btn').addEventListener('click', async () => {
+            const model = document.getElementById('model').value;
+            const prompt = document.getElementById('prompt').value;
+
+            if (!model || !prompt) {
+                alert('Please select a model and enter a prompt.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/proxy/inference', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: model,
+                        messages: [
+                            { role: 'system', content: '' },
+                            { role: 'user', content: prompt }
+                        ],
+                        temperature: 1,
+                        top_p: 1
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                const assistantMessage = data.content || 'No response from the assistant.';
+                const responseElement = document.getElementById('response');
+                responseElement.style.display = 'block';
+                responseElement.textContent = assistantMessage;
+            } catch (error) {
+                console.error(error);
+                alert('Failed to send the request. Please try again.');
+            }
+        });
+
+        // Clear button functionality
+        const clearBtn = document.getElementById('clear-btn');
+        clearBtn.addEventListener('click', () => {
+            const modelSelect = document.getElementById('model');
+            if (modelSelect.options.length > 0) {
+                modelSelect.selectedIndex = 0;
+            }
+            document.getElementById('prompt').value = '';
+            document.getElementById('response').style.display = 'none';
+            document.getElementById('response').textContent = '';
+        });
+
+        // Fetch models from GitHub Models catalog and populate the dropdown
+        async function populateModels() {
+            try {
+                const response = await fetch('/proxy/models-catalog');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch models catalog');
+                }
+                const models = await response.json();
+                const modelSelect = document.getElementById('model');
+                modelSelect.innerHTML = '';
+                models.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model.id;
+                    option.textContent = `${model.name} (${model.publisher}) — ${model.id}`;
+                    option.title = model.summary;
+                    modelSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error(error);
+                alert('Failed to load models catalog.');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', populateModels);
+    </script>
 </body>
 
 </html>
